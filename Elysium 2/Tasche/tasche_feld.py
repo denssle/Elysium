@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 class Feld:
     def __init__(self, x, y):
         self.zeile = y        

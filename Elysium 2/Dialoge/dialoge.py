@@ -14,7 +14,7 @@ class Dialog:
         
     def wahl(self, text, w1, w2, w3, w4):#aussage mit anschließender wahl
         self.sprechen(text)
-        
+        #antwortmöglichkeiten
         if w1 != None:
             print "1: ", w1[0]
         if w2 != None:
@@ -40,7 +40,7 @@ class Dialog:
         self.sprechen(wahl[1])
         self.kette = wahl[2]
             
-    def auswirkungen(self):
+    def auswirkungen(self, attribut, wert):#mögliche auswirkungen wie ep gewinn 
         pass
         
     def ciao(self):#gesprächsende
@@ -56,23 +56,27 @@ if __name__ == "__main__":
     gespraech.sprechen(ansprechen)
     
     frage = "Wie geht es dir, " + Held + "?"
-    antwort1 = ["Gut", "Das freut mich", False]
-    antwort2 = ["Schlecht", "Oh!", True]
-    antwort3 = None
-    antwort4 = None
+    antwort1 = ["Gut.", "Das freut mich", False]
+    antwort2 = ["Schlecht.", "Oh!", True]
+    antwort3, antwort4 = None, None
+    
     gespraech.wahl(frage, antwort1, antwort2, antwort3, antwort4)
     
-    print gespraech.kette
     if gespraech.kette == True:
         frage = "Was ist denn los?"
-        antwort1 = ["Nichts", "REAKTION", False]
+        antwort1 = ["Antwort", "REAKTION", False]
         antwort2 = ["Antwort", "REAKTION", False]
         antwort3 = ["Antwort", "REAKTION", False]
         antwort4 = ["Antwort", "REAKTION", False]
         gespraech.wahl(frage, antwort1, antwort2, antwort3, antwort4)
         
     else:
-        gespraech.sprechen("Dann ist ja alles gut!")
-
+        frage = "Dann ist ja alles gut!\nNEUE FRAGE"
+        
+        antwort1 = ["Antwort", "REAKTION", False]
+        antwort2 = ["Antwort", "REAKTION", False]
+        antwort3 = ["Antwort", "REAKTION", False]
+        antwort4 = ["Antwort", "REAKTION", False]
+        gespraech.wahl(frage, antwort1, antwort2, antwort3, antwort4)
         
     

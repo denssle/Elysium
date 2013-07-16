@@ -62,7 +62,7 @@ if __name__ == "__main__":
     
     gespraech.wahl(frage, antwort1, antwort2, antwort3, antwort4)
 
-    if gespraech.kette[0] == True:
+    if gespraech.kette[0] == True:#antwort war schlecht
         frage = "Was ist denn los?"
         
         antwort1 = ["Antwort", "REAKTION", False]
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         antwort4 = ["Antwort", "REAKTION", False]
         gespraech.wahl(frage, antwort1, antwort2, antwort3, antwort4)
 
-    else:
+    else:#antwort war gut
         frage = "Dann ist ja alles gut!\n   NEUE FRAGE"
         
         antwort1 = ["Antwort", "REAKTION", False]

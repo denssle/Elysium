@@ -416,8 +416,31 @@ class Taschentest_hineinlegen(unittest.TestCase):
         for i in range(0, 5):
             for j in range(0, 5):
                 #Assert
-                self.assertEqual(test.test_feld_belegt(i, j), False) 
-            
+                self.assertEqual(test.test_feld_belegt(i, j), False)
+                
+    def test_grosse_items(self):
+        #Arrange
+        test = Tasche(5, 5)
+        #Act
+        test.hineinlegen(Item("ITEM",3,3,1))
+        #Assert
+        for i in range(0, 2):
+            for j in range(0, 2):
+                self.assertEqual(test.test_feld_belegt(i, j), True) 
+
+    def test_grosses_item_in_halbvoller_tasche(self):
+        #Arrange
+        test = Tasche(5, 5)
+        #Act
+        for x in range(0, 10):
+            name = "Hans" + str(x)
+            test.hineinlegen(Item(name,1,1,1))
+        test.hineinlegen(Item("Christoff",2,2,1))
+        #Assert
+        for i in range(2, 4):
+            for j in range(0, 2):
+                self.assertEqual(test.tasche[i][j].belegt_item, "Christoff")
+                
 class Taschentest_herausnehmen(unittest.TestCase):
     def test_item_herausnehmen(self):
         #Arrange
@@ -434,9 +457,9 @@ class Taschentest_herausnehmen(unittest.TestCase):
         #Arrange
         test = Tasche(5, 5)
         #Act
-        test.hineinlegen(Item("ITEM", 5,5,1))
-        test.hineinlegen(Item("ITEM2", 5,5,1))
-        test.hineinlegen(Item("ITEM3", 5,5,1))
+        test.hineinlegen(Item("ITEM", 1,1,1))
+        test.hineinlegen(Item("ITEM2", 1,1,1))
+        test.hineinlegen(Item("ITEM3", 1,1,1))
         
         test.herausnehmen("ITEM")
         #Assert
@@ -458,7 +481,9 @@ class Taschentest_herausnehmen(unittest.TestCase):
             for j in range(0, 5):
                 self.failIfEqual(test.test_feld_belegt(i, j), True)
         
-        
+
+                
+                
 if __name__ == "__main__": 
     unittest.main()
     

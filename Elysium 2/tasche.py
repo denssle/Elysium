@@ -45,25 +45,43 @@ class Tasche:
                     print "Item entfernt!"
         
     def hineinlegen(self, gegenstand): #das hinzufügen eines Items in die Tasche
+        stapelung = True
         zeilen_platz = gegenstand.z_platz
         spalten_platz = gegenstand.s_platz        
         if self.zeile < zeilen_platz or self.spalte < spalten_platz or zeilen_platz <1 or spalten_platz <1:
             return
-        
+        #wenn item schon vorhanden: 
         for i in range(0, self.spalte):
             for j in range(0, self.zeile):
                 if self.tasche[i][j].belegt_item == gegenstand.name:
                     self.tasche[i][j].anzahl += gegenstand.stapel
-                    gegenstand.stapel = self.tasche[i][j].anzahl
-                    return
+                    stapelung = False
+        if stapelung == False:
+            return
+        #belegbare felder suchen
         try:
             for i in range(0, self.spalte):
                 for j in range(0, self.zeile):
                     if self.test_feld_belegt(j, i) == False:#leeres Feld gefunden
-                        self.feld_belegen(j, i, gegenstand)
-                        return
+                        if self.grosse_items_test(gegenstand, i, j) != False:
+                            for k in range(j, gegenstand.s_platz+j):
+                                for l in range(i, gegenstand.z_platz+i):
+                                    self.feld_belegen(k, l, gegenstand)
+                            return
         except:
             print "Kein Platz!"
+            
+    def grosse_items_test(self, gegenstand, zeile, spalte):
+        zeilenplatz = gegenstand.z_platz + zeile -1
+        spaltenplatz = gegenstand.s_platz + spalte -1
+        
+        if zeilenplatz > self.zeile or spaltenplatz > self.spalte:
+            return False
+        
+        for i in range(spalte, spaltenplatz):
+            if self.test_feld_belegt(spalte + i, zeile) == True:
+                    return False
+            zeile += 1
             
     def feld_belegen(self, position_x, position_y, item):#verändert die Belegung eines Feldes
         spalte = int(position_y)
@@ -110,7 +128,7 @@ if __name__ == "__main__":
             pass
             
     while True:
-        print "1: Feldbelegungstest \n2: Feldbelegungsbefehl \n3: Item hinzufügen \n4: Item herausnehmen \n"
+        print "1: Feldbelegungstest \n2: Feldbelegungsbefehl \n3: Item hinzufügen \n4: Item herausnehmen \n5: Grosse Items hinzufügen"
         eingabe = raw_input("Ihre Eingabe, bitte:\n")
         if eingabe == "q":
             print "Cya!"
@@ -137,7 +155,11 @@ if __name__ == "__main__":
             fuu.herausnehmen(name)
         
         elif eingabe == "5":
-            print "Itemzeug"
+            print "Grosse Items!"
             wahl = raw_input("Name?\n")
+            zeilen = int(raw_input("Zeilen?"))
+            spalten = int(raw_input("Spalten?"))
+            item = Item(wahl ,spalten,zeilen,1)
+            fuu.hineinlegen(item)
             
         fuu.gib_gegenstand()

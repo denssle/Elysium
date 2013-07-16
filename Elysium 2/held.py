@@ -23,7 +23,7 @@ class Held:
         pass
     
     
-class Inventar(self):
+class Inventar(Held):
     def __init__(self):
         pass
         

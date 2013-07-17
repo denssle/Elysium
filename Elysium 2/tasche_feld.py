@@ -12,7 +12,7 @@ class Feld:
         if self.belegt == False:
             self.belegt = True
             self.belegt_item = item.name
-            
+            self.anzahl
         else:
             self.belegt = False
             self.belegt_item = "Leer"

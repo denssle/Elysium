@@ -21,10 +21,8 @@ class Tasche:
             
     def __groessen_test__(self, zeile, spalte):
         if zeile > 32 or spalte > 32:
-            print "Zu gross!"
             return False
         elif zeile < 1 or spalte < 1:
-            print "Zu klein!"
             return False
         else:
             return True
@@ -38,12 +36,13 @@ class Tasche:
             print zeile
             
     def herausnehmen(self, gegenstand):#herausnehmen und/oder anheben eines Gegenstandes
+        zeile = 0
         for i in range(0, self.spalte):
             for j in range(0, self.zeile):
-                if self.tasche[i][j].belegt_item == gegenstand:
-                    self.feld_belegen(i, j, "Leer")
-                    print "Item entfernt!"
-        
+                if self.tasche[i][zeile].belegt_item == gegenstand:
+                    platzhalter = Item("Leer",1,1,0)
+                    self.feld_belegen(i, zeile, platzhalter)
+           
     def hineinlegen(self, gegenstand): #das hinzufügen eines Items in die Tasche
         stapelung = True
         zeilen_platz = gegenstand.z_platz
@@ -69,7 +68,7 @@ class Tasche:
                                     self.feld_belegen(k, l, gegenstand)
                             return
         except:
-            print "Kein Platz!"
+            pass
             
     def grosse_items_test(self, gegenstand, zeile, spalte):
         zeilenplatz = gegenstand.z_platz + zeile -1
@@ -131,7 +130,6 @@ if __name__ == "__main__":
         print "1: Feldbelegungstest \n2: Feldbelegungsbefehl \n3: Item hinzufügen \n4: Item herausnehmen \n5: Grosse Items hinzufügen"
         eingabe = raw_input("Ihre Eingabe, bitte:\n")
         if eingabe == "q":
-            print "Cya!"
             break
         
         elif eingabe == "1":

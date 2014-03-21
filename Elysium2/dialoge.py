@@ -17,11 +17,11 @@ class Dialog:
         #antwortmöglichkeiten
         if w1 != None:
             print "1: ", w1[0]
-        if w2 != None:
+        elif w2 != None:
             print "2: ", w2[0]
-        if w3 != None:
+        elif w3 != None:
             print "3: ", w3[0]
-        if w4 != None:
+        elif w4 != None:
             print "4: ", w4[0]
         
         wahl = raw_input("Antwort:")

@@ -24,9 +24,9 @@ class Grafik:
             for y in range(0, 4):
                 position = [abstand_rand+(x*feldgroesse), abstand_rand+(y*feldgroesse), feldgroesse-1, feldgroesse-1]# x, y
                 if Tasche(zeilen_1, spalten_1).test_feld_belegt(x, y) == False:
-                    pygame.draw.rect(screen, WHITE, position, 0) #position, grš§e
+                    pygame.draw.rect(screen, WHITE, position, 0) #position, groesse
                 else:
-                    pygame.draw.rect(screen, RED, position, 0) #position, grš§e
+                    pygame.draw.rect(screen, RED, position, 0) #position, groesse
                     
     def text_schreiben(self, text):
         font = pygame.font.Font(None, 30)
